@@ -35,7 +35,7 @@ const DUMMY_MEALS = [
     id: "m5",
     name: "Chilli Chicken",
     description: "Fresh chicken & spicy sauce",
-    price: 150,
+    price: 350,
   },
 ];
 
