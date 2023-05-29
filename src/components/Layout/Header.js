@@ -11,7 +11,8 @@ const Header = (props) => {
     <Fragment>
       <header className={classes.header}>
         <h1>Family Food</h1>
-        <HeaderCartButton/>
+        {/* Executing the function showCartHandler value send via onShowCart handler in the header button below, since its a custom component so again making a custom function*/}
+        <HeaderCartButton onDisplayCart = {props.onShowCart}/>
       </header>
       <div className={classes["main-image"]}>
         {/* locally calling image here */}

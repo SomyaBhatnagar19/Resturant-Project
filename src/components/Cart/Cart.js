@@ -13,14 +13,17 @@ const Cart = (props) => {
     </ul>
   );
   return (
-    <Modal>
+    // sending the close cart to the Modal component to make backdrop invisible or vanish
+    <Modal onCloseCart={props.onCloseCart}>
       {cartitems}
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>Rs. 400.00</span>
       </div>
       <div className={classes.actions}>
-        <button className={classes["button--alt"]}>Close</button>
+        {/* fetching the value through App.js via onCloseCart function that points to the value inside hideCartHandler to close the cart when button is pressed so making an onClick to close it when button pressed */}
+        {/* for making the BackDrop unfunctionable when cart is closed we go to Modal.js */}
+        <button className={classes["button--alt"]} onClick={props.onCloseCart}>Close</button>
         <button className={classes.button}>Order</button>
       </div>
     </Modal>
