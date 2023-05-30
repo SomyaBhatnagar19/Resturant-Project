@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, {useState } from "react";
 
 import Header from "./components/Layout/Header";
 
@@ -6,6 +6,7 @@ import Meals from "./components/Meals/Meals";
 
 import Cart from "./components/Cart/Cart";
 
+import CartProvider from "./store/CartProvider";
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
 
@@ -18,7 +19,7 @@ function App() {
   };
 
   return (
-    <Fragment>
+    <CartProvider>
       {/* here by the help of the true or false value of cartIsShown variable we check weather to open the cart or not */}
       {/* also to make the cart closable on clicking the close button we make a custom function that sends this and points to the Cart component & also closes the BackDrop */}
       {cartIsShown && <Cart onCloseCart = {hidecartHandler}/> }
@@ -27,7 +28,7 @@ function App() {
       <main>
         <Meals/>
       </main>
-    </Fragment>
+    </CartProvider>
   );
 }
 
