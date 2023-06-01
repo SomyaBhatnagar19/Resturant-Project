@@ -1,12 +1,14 @@
 // making a generalised input for any component that requires it
+import React, { useRef } from 'react';
 import classes from './Input.module.css';
 
-const Input = props => {
-    return <div className={classes.input}>
-        <label htmlFor={props.input.id}>{props.label}</label>
-        <input {...props.input}/>
-        {/* {...props.input} -> this helps in deciding the id and the type of the input tag used */}
+const Input = React.forwardRef((props, ref) => {
+  return (
+    <div className={classes.input}>
+      <label htmlFor={props.input.id}>{props.label}</label>
+      <input ref={ref} {...props.input} />
     </div>
-};
+  );
+});
 
 export default Input;

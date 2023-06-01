@@ -16,7 +16,7 @@ const HeaderCartButton = (props) => {
   const cartCtx = useContext(CartContext);
 
   // to count no of items in cart
-  const TotalItemsInCart = cartCtx.item.reduce((curNumber, item)=>{ return curNumber + item.amount}, 0);
+  const TotalItemsInCart = cartCtx.items.reduce((curNumber, item)=>{ return curNumber + item.amount}, 0);
 
   return (
     <Fragment>

@@ -1,30 +1,105 @@
-import classes from "./Cart.module.css";
 
-import Modal from "../UI/Modal";
+// import { useContext } from 'react';
+
+// import Modal from '../UI/Modal';
+// import CartItem from './CartItem';
+// import classes from './Cart.module.css';
+// import CartContext from '../../store/cart-context';
+
+// const Cart = (props) => {
+//   const cartCtx = useContext(CartContext);
+
+//   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+//   const hasItems = cartCtx.items.length > 0;
+
+//   const cartItemRemoveHandler = (id) => {
+//     cartCtx.removeItem(id);
+//   };
+
+//   const cartItemAddHandler = (item) => {
+//     cartCtx.addItem({ ...item, amount: 1 });
+//   };
+
+//   const cartItems = (
+//     <ul className={classes['cart-items']}>
+//       {cartCtx.items.map((item) => (
+//         <CartItem
+//           key={item.id}
+//           name={item.name}
+//           amount={item.amount}
+//           price={item.price}
+//           onRemove={cartItemRemoveHandler.bind(null, item.id)}
+//           onAdd={cartItemAddHandler.bind(null, item)}
+//         />
+//       ))}
+//     </ul>
+//       );
+
+//       return (
+//         <Modal onClose={props.onClose}>
+//           {cartItems}
+//           <div className={classes.total}>
+//             <span>Total Amount</span>
+//             <span>{totalAmount}</span>
+//           </div>
+//           <div className={classes.actions}>
+//             <button className={classes['button--alt']} onClick={props.onClose}>
+//               Close
+//             </button>
+//             {hasItems && <button className={classes.button}>Order</button>}
+//           </div>
+//         </Modal>
+//       );
+//     };
+    
+//     export default Cart;
+import { useContext } from 'react';
+import Modal from '../UI/Modal';
+import CartItem from './CartItem';
+import classes from './Cart.module.css';
+import CartContext from '../../store/cart-context';
 
 const Cart = (props) => {
-  const cartitems = (
-    <ul className={classes["cart-items"]}>
-      {[{ id: "c1", name: "Shahi Paneer", amount: 2, price: 200.0 }].map(
-        (item) => (
-          <li key={item.id}>{item.name}</li>
-        )
-      )}
+  const cartCtx = useContext(CartContext);
+
+  const totalAmount = `Rs. ${cartCtx.totalAmount.toFixed(2)}`;
+  const hasItems = cartCtx.items.length > 0;
+
+  const cartItemRemoveHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
+
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+  const cartItems = (
+    <ul className={classes['cart-items']}>
+      {cartCtx.items.map((item) => (
+        <CartItem
+          key={item.id}
+          name={item.name}
+          amount={item.amount}
+          price={item.price}
+          onRemove={cartItemRemoveHandler.bind(null, item.id)}
+          onAdd={cartItemAddHandler.bind(null, item)}
+        />
+      ))}
     </ul>
   );
+
   return (
-    // sending the close cart to the Modal component to make backdrop invisible or vanish
-    <Modal onCloseCart={props.onCloseCart}>
-      {cartitems}
+    <Modal onClose={props.onCloseCart}>
+      {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>Rs. 400.00</span>
+        <span>{totalAmount}</span>
       </div>
       <div className={classes.actions}>
-        {/* fetching the value through App.js via onCloseCart function that points to the value inside hideCartHandler to close the cart when button is pressed so making an onClick to close it when button pressed */}
-        {/* for making the BackDrop unfunctionable when cart is closed we go to Modal.js */}
-        <button className={classes["button--alt"]} onClick={props.onCloseCart}>Close</button>
-        <button className={classes.button}>Order</button>
+        <button className={classes['button--alt']} onClick={props.onCloseCart}>
+          Close
+        </button>
+        {hasItems && <button className={classes.button}>Order</button>}
       </div>
     </Modal>
   );
